@@ -1,7 +1,9 @@
 require 'helper'
 
 class TestGryfxcrmod < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
-  end
+	def setup
+		CodeRunner.setup_run_class('gryfx')
+	end
+	def test_basics
+	end
 end
