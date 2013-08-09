@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gryfxcrmod"
   gem.homepage = "http://github.com/edmundhighcock/gryfxcrmod"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{CodeRunner module for the Gryfx Gyrofluid Transport Solver}
+  gem.description = %Q{This is a customised subclass of the CodeRunner::Run  class which allows CodeRunner to run and analyse the gyrofluid GPU turbulent transport solver Gryfx.}
   gem.email = "edmundhighcock@users.sourceforge.net"
   gem.authors = ["Edmund Highcock"]
   # dependencies defined in Gemfile
