@@ -31,6 +31,11 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
 end
+Rake::TestTask.new(:sync_variables) do |test|
+  test.libs << 'lib' << 'sync_variables'
+  test.pattern = 'sync_variables/sync_variables.rb'
+  test.verbose = true
+end
 
 #require 'rcov/rcovtask'
 #Rcov::RcovTask.new do |test|
