@@ -13,7 +13,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>0.2},
+       :autoscanned_defaults=>[0.2]},
      :shat=>
       {:should_include=>"true",
        :description=>"",
@@ -25,7 +25,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>0.8},
+       :autoscanned_defaults=>[0.8]},
      :qinp=>
       {:should_include=>"true",
        :description=>
@@ -38,7 +38,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.4},
+       :autoscanned_defaults=>[1.4]},
      :rmaj=>
       {:should_include=>"true",
        :description=>"Major radius/a (Position of magnetic axis)",
@@ -49,7 +49,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0},
+       :autoscanned_defaults=>[1.0]},
      :shift=>
       {:should_include=>"true",
        :description=>"shift = -R q**2 dbeta/drho (>0)",
@@ -61,7 +61,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>0.0},
+       :autoscanned_defaults=>[0.0]},
      :drhodpsi=>
       {:should_include=>"true",
        :description=>nil,
@@ -72,7 +72,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0},
+       :autoscanned_defaults=>[1.0]},
      :epsl=>
       {:should_include=>"true",
        :description=>"epsl=2 a/R",
@@ -84,7 +84,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>2.0},
+       :autoscanned_defaults=>[2.0]},
      :kxfac=>
       {:should_include=>"true",
        :description=>nil,
@@ -95,7 +95,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0}}},
+       :autoscanned_defaults=>[1.0]}}},
  :kt_grids_box_parameters=>
   {:description=>"",
    :should_include=>"true",
@@ -110,7 +110,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>5}}},
+       :autoscanned_defaults=>[5]}}},
  :dist_fn_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -124,7 +124,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>0}}},
+       :autoscanned_defaults=>[0]}}},
  :parameters=>
   {:description=>"",
    :should_include=>"true",
@@ -140,7 +140,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0}}},
+       :autoscanned_defaults=>[1.0]}}},
  :nonlinear_terms_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -155,7 +155,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>0.1},
+       :autoscanned_defaults=>[0.1]},
      :nonlinear_mode=>
       {:should_include=>"true",
        :description=>"Include nonlinear terms? ('on','off')",
@@ -166,7 +166,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"}}},
+       :autoscanned_defaults=>["off"]}}},
  :gs2_diagnostics_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -180,7 +180,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>10},
+       :autoscanned_defaults=>[10]},
      :nsave=>
       {:should_include=>"true",
        :description=>"Write restart files every nsave timesteps",
@@ -190,7 +190,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>5000},
+       :autoscanned_defaults=>[5000]},
      :navg=>
       {:should_include=>"true",
        :description=>"Any time averages performed over navg",
@@ -200,7 +200,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>100}}},
+       :autoscanned_defaults=>[100]}}},
  :knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -215,7 +215,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>0.02},
+       :autoscanned_defaults=>[0.02]},
      :maxdt=>
       {:should_include=>"true",
        :description=>nil,
@@ -226,7 +226,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>0.02},
+       :autoscanned_defaults=>[0.02]},
      :nstep=>
       {:should_include=>"true",
        :description=>"Maximum number of timesteps",
@@ -237,7 +237,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>10000}}},
+       :autoscanned_defaults=>[10000]}}},
  :species_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -251,7 +251,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>1}}},
+       :autoscanned_defaults=>[1]}}},
  :species_parameters=>
   {:description=>"SPECIES PARAMETERS",
    :help=>
@@ -264,7 +264,7 @@
        :should_include=>"true",
        :description=>"Charge",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[1],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -276,7 +276,7 @@
        :should_include=>"true",
        :description=>"Mass",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[1.0],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -287,7 +287,7 @@
        :should_include=>"true",
        :description=>"Density\t",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[1.0],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -298,7 +298,7 @@
        :should_include=>"true",
        :description=>"Temperature",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[1.0],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -311,7 +311,7 @@
        :should_include=>"true",
        :description=>"-1/T (dT/drho)",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[6.9],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -323,7 +323,7 @@
        :should_include=>"true",
        :description=>"-1/n (dn/drho)",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[2.2],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -334,7 +334,7 @@
        :should_include=>"true",
        :description=>"?",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[0.0],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -345,7 +345,7 @@
        :should_include=>"true",
        :description=>"collisionality parameter",
        :tests=>["Tst::FLOAT"],
-       :autoscanned_defaults=>[0.0],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? Float or kind_of? Integer",
           :explanation=>
@@ -357,7 +357,7 @@
        :should_include=>"true",
        :description=>"Type of species, e.g. 'ion', 'electron', 'beam'",
        :tests=>["Tst::STRING"],
-       :autoscanned_defaults=>["default"],
+       :autoscanned_defaults=>[],
        :must_pass=>
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
@@ -385,7 +385,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:dens0,
-       :autoscanned_defaults=>[1.0]},
+       :autoscanned_defaults=>[]},
      :u0=>
       {:should_include=>"true",
        :description=>nil,
@@ -398,7 +398,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:u0,
-       :autoscanned_defaults=>[1.0]},
+       :autoscanned_defaults=>[]},
      :uprim2=>
       {:should_include=>"true",
        :description=>nil,
@@ -411,7 +411,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:uprim2,
-       :autoscanned_defaults=>[0.0]},
+       :autoscanned_defaults=>[]},
      :nustar=>
       {:should_include=>"true",
        :description=>nil,
@@ -424,7 +424,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:nustar,
-       :autoscanned_defaults=>[-1.0]},
+       :autoscanned_defaults=>[]},
      :nu=>
       {:should_include=>"true",
        :description=>nil,
@@ -437,7 +437,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:nu,
-       :autoscanned_defaults=>[-1.0]},
+       :autoscanned_defaults=>[]},
      :nu_h=>
       {:should_include=>"true",
        :description=>nil,
@@ -450,7 +450,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:nu_h,
-       :autoscanned_defaults=>[0.0]},
+       :autoscanned_defaults=>[]},
      :tperp0=>
       {:should_include=>"true",
        :description=>nil,
@@ -463,7 +463,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:tperp0,
-       :autoscanned_defaults=>[0.0]},
+       :autoscanned_defaults=>[]},
      :tpar0=>
       {:should_include=>"true",
        :description=>nil,
@@ -476,7 +476,7 @@
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
        :code_name=>:tpar0,
-       :autoscanned_defaults=>[0.0]},
+       :autoscanned_defaults=>[]},
      :source=>
       {:should_include=>"true",
        :description=>
@@ -488,7 +488,8 @@
         [{:test=>"kind_of? Numeric",
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float},
+       :type=>:Float,
+       :autoscanned_defaults=>[]},
      :sprim=>
       {:should_include=>"true",
        :description=>"Gradient of normalised source.",
@@ -498,7 +499,8 @@
         [{:test=>"kind_of? Numeric",
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float},
+       :type=>:Float,
+       :autoscanned_defaults=>[]},
      :gamma_ai=>
       {:should_include=>"true",
        :description=>
@@ -510,7 +512,8 @@
         [{:test=>"kind_of? Numeric",
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float},
+       :type=>:Float,
+       :autoscanned_defaults=>[]},
      :gamma_ae=>
       {:should_include=>"true",
        :description=>
@@ -522,7 +525,8 @@
         [{:test=>"kind_of? Numeric",
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float}}},
+       :type=>:Float,
+       :autoscanned_defaults=>[]}}},
  :gryfx_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -536,7 +540,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :zero_restart_avg=>
       {:should_include=>"true",
        :description=>nil,
@@ -546,7 +550,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :no_zderiv_covering=>
       {:should_include=>"true",
        :description=>nil,
@@ -556,7 +560,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :no_omegad=>
       {:should_include=>"true",
        :description=>nil,
@@ -566,7 +570,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :const_curv=>
       {:should_include=>"true",
        :description=>nil,
@@ -576,17 +580,18 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :varenna=>
       {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
+       :description=>"",
+       :help=>
+        "If \"on\", use the closure from the Beer et. al. Varenna paper.",
        :code_name=>:varenna,
        :must_pass=>
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :nlpm=>
       {:should_include=>"true",
        :description=>nil,
@@ -596,7 +601,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :inlpm=>
       {:should_include=>"true",
        :description=>nil,
@@ -606,7 +611,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>2},
+       :autoscanned_defaults=>[2]},
      :dnlpm=>
       {:should_include=>"true",
        :description=>nil,
@@ -617,7 +622,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0},
+       :autoscanned_defaults=>[1.0]},
      :smagorinsky=>
       {:should_include=>"true",
        :description=>nil,
@@ -627,7 +632,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :hyper=>
       {:should_include=>"true",
        :description=>nil,
@@ -637,7 +642,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :nu_hyper=>
       {:should_include=>"true",
        :description=>nil,
@@ -648,7 +653,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0},
+       :autoscanned_defaults=>[1.0]},
      :p_hyper=>
       {:should_include=>"true",
        :description=>nil,
@@ -658,7 +663,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>2},
+       :autoscanned_defaults=>[2]},
      :debug=>
       {:should_include=>"true",
        :description=>nil,
@@ -668,17 +673,17 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"off"},
+       :autoscanned_defaults=>["off"]},
      :s_alpha=>
       {:should_include=>"true",
        :description=>nil,
-       :help=>nil,
+       :help=>"Use s_alpha geometry if \"on\".   ",
        :code_name=>:s_alpha,
        :must_pass=>
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"on"},
+       :autoscanned_defaults=>["on"]},
      :init=>
       {:should_include=>"true",
        :description=>nil,
@@ -688,7 +693,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"density"},
+       :autoscanned_defaults=>["density"]},
      :init_amp=>
       {:should_include=>"true",
        :description=>nil,
@@ -699,7 +704,7 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>1.0e-05},
+       :autoscanned_defaults=>[1.0e-05]},
      :write_omega=>
       {:should_include=>"true",
        :description=>nil,
@@ -709,7 +714,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"on"},
+       :autoscanned_defaults=>["on"]},
      :write_phi=>
       {:should_include=>"true",
        :description=>nil,
@@ -719,7 +724,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"on"},
+       :autoscanned_defaults=>["on"]},
      :scan_type=>
       {:should_include=>"true",
        :description=>nil,
@@ -729,7 +734,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"outputs"},
+       :autoscanned_defaults=>["outputs"]},
      :scan_number=>
       {:should_include=>"true",
        :description=>nil,
@@ -739,7 +744,7 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>1}}},
+       :autoscanned_defaults=>[1]}}},
  :collision_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -753,4 +758,4 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>"none"}}}}
+       :autoscanned_defaults=>["none"]}}}}

@@ -36,6 +36,11 @@ Rake::TestTask.new(:sync_variables) do |test|
   test.pattern = 'sync_variables/sync_variables.rb'
   test.verbose = true
 end
+Rake::TestTask.new(:sync_mediawiki) do |test|
+  test.libs << 'lib' << 'sync_mediawiki'
+  test.pattern = 'sync_mediawiki/sync_mediawiki.rb'
+  test.verbose = true
+end
 
 #require 'rcov/rcovtask'
 #Rcov::RcovTask.new do |test|
