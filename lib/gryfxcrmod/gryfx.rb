@@ -2,7 +2,8 @@ class CodeRunner
 	#  This is a customised subclass of the CodeRunner::Run  class which allows CodeRunner to run and analyse the gyrofluid GPU turbulent transport solver Gryfx.
 	#
 	#  It  generates the Gryfx input file, and both analyses the results and allows easy plotting of them. 
-	class Gryfx < Run::FortranNamelistC
+	CodeRunner.setup_run_class('gs2')
+	class Gryfx < Gs2
 		#include CodeRunner::SYSTEM_MODULE
 
 
@@ -12,7 +13,7 @@ class CodeRunner
 
 		# Use the Run::FortranNamelist tools to process the variable database
 		setup_namelists(@code_module_folder)
-		#require 'trinitycrmod/output_files'
+		require 'gryfxcrmod/namelist_tools'
 		#require 'trinitycrmod/graphs'
 
 		################################################
@@ -44,7 +45,7 @@ class CodeRunner
 			name += " real_id: #@real_id" if @real_id
 			beginning = sprintf("%2d:%d %-60s %1s:%2.1f(%s) %3s%1s",  @id, @job_no, name, @status.to_s[0,1],  @run_time.to_f / 60.0, @nprocs.to_s, percent_complete, "%")
 			if ctd
-				beginning += sprintf("Q:%f, Pfusion:%f MW, Ti0:%f keV, Te0:%f keV, n0:%f x10^20", fusionQ, pfus, ti0, te0, ne0)
+				#beginning += sprintf("Q:%f, Pfusion:%f MW, Ti0:%f keV, Te0:%f keV, n0:%f x10^20", fusionQ, pfus, ti0, te0, ne0)
 			end
 			beginning += "  ---#{@comment}" if @comment
 			beginning
@@ -81,6 +82,34 @@ class CodeRunner
 				calculate_results 
 			end
 			#p ['fusionQ is ', fusionQ]
+		end
+
+		def get_status
+			if @running
+				@status = :Incomplete
+			else
+				get_completed_timesteps
+				if percent_complete = 100.0*@completed_timesteps.to_f/(nstep/nwrite)  > 5.0
+					@status = :Complete
+				else
+					@status = :Failed
+				end
+			end
+		end
+
+		def get_completed_timesteps
+			if FileTest.exist?(@run_name  + '.cdf')
+				@completed_timesteps = gsl_vector('t').size
+			else
+				@completed_timesteps = 0
+			end
+		end
+
+		def netcdf_filename
+			@directory + '/' +  @run_name + '.cdf'
+		end
+
+		def calculate_results
 		end
 
 	end

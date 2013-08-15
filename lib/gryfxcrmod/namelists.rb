@@ -43,7 +43,7 @@
       {:should_include=>"true",
        :description=>"Major radius/a (Position of magnetic axis)",
        :help=>"Major radius/a (Position of magnetic axis)",
-       :code_name=>:Rmaj,
+       :code_name=>:rmaj,
        :must_pass=>
         [{:test=>"kind_of? Numeric",
           :explanation=>
@@ -95,7 +95,97 @@
           :explanation=>
            "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
        :type=>:Float,
-       :autoscanned_defaults=>[1.0]}}},
+       :autoscanned_defaults=>[1.0]},
+     :ntheta=>
+      {:should_include=>"true",
+       :description=>
+        "Number of points along field line (theta) per 2 pi segment",
+       :help=>
+        "Number of grid points along equilibrium magnetic field between <math>\\theta=(-\\pi,\\pi)</math> (in addition to a grid point at <math>\\theta=0</math>).\n** Ignored in some cases",
+       :code_name=>:ntheta,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer,
+       :autoscanned_defaults=>[32]},
+     :nperiod=>
+      {:should_include=>"true",
+       :description=>
+        "Number of 2 pi segments along equilibrium magnetic field.",
+       :help=>
+        "Sets the number of <math>2\\pi</math> segments along equilibrium magnetic field to include in simulation domain.  <math>N_{\\rm segments} = (2n_{\\rm period} - 1)</math>.\n** Ignored in some cases",
+       :code_name=>:nperiod,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer},
+     :rhoc=>
+      {:should_include=>"true",
+       :description=>
+        "Flux surface label. Usually rho = diameter/diameter of LCFS",
+       :help=>
+        "rhoc is flux surface label (0< rhoc< 1). Its exact meaning depends on irho. Usually rho = diameter/diameter of LCFS\n** When irho = 1, rhoc = sqrt(toroidal flux)/sqrt(toroidal flux of LCFS)\n** When irho = 2, rhoc =  diameter/(diameter of LCFS).  recommended\n** When irho = 3, rhoc =  poloidal flux/(poloidal flux of LCFS)",
+       :code_name=>:rhoc,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :r_geo=>
+      {:should_include=>"true",
+       :description=>"Major radius/a (centerpoint of LCFS)",
+       :help=>"Major radius/a (centerpoint of LCFS)",
+       :code_name=>:r_geo,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :akappa=>
+      {:should_include=>"true",
+       :description=>
+        "Sets local elongation when local toroidal equilibrium is specified.",
+       :help=>
+        "Sets local elongation when local toroidal equilibrium is specified.",
+       :code_name=>:akappa,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :akappri=>
+      {:should_include=>"true",
+       :description=>"akappri = dkappa/drho",
+       :help=>
+        "Sets local gradient of elongation when local toroidal equilibrium is specified.\n** akappri = <math> d\\kappa/d\\rho </math>",
+       :code_name=>:akappri,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :tri=>
+      {:should_include=>"true",
+       :description=>"tri = arcsin[(R(max(Z))-R_major)/r_mid]",
+       :help=>
+        "Sets local triangularity when local toroidal equilibrium is specified.\n** triangularity is tri = arcsin[(R(max(Z))-R_major)/r_mid]",
+       :code_name=>:tri,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :tripri=>
+      {:should_include=>"true",
+       :description=>"tripri =  dtri/drho",
+       :help=>
+        "Sets local gradient of triangularity when local toroidal equilibrium is specified.\n** tripri =  <math>dtri/d\\rho</math>",
+       :code_name=>:tripri,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float}}},
  :kt_grids_box_parameters=>
   {:description=>"",
    :should_include=>"true",
@@ -110,7 +200,55 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>[5]}}},
+       :autoscanned_defaults=>[5]},
+     :nx=>
+      {:should_include=>"true",
+       :description=>
+        "The number of kx modes: the number of kx modes actually simulated (ntheta0) is equal to 2*(nx - 1)/3 + 1, due to the need to prevent aliasing.",
+       :help=>
+        "The number of kx modes: the number of kx modes actually simulated (ntheta0) is equal to 2*(nx - 1)/3 + 1, due to the need to prevent aliasing.",
+       :code_name=>:nx,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer,
+       :autoscanned_defaults=>[16]},
+     :ny=>
+      {:should_include=>"true",
+       :description=>
+        "The number of ky modes: the number of ky modes actually simulated (naky) is equal to (ny - 1)/3 + 1, due to the need to prevent aliasing.",
+       :help=>
+        "The number of ky modes: the number of ky modes actually simulated (naky) is equal to (ny - 1)/3 + 1, due to the need to prevent aliasing.",
+       :code_name=>:ny,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer,
+       :autoscanned_defaults=>[16]},
+     :y0=>
+      {:should_include=>"true",
+       :description=>
+        "The length of the box in the y direction (measured in the Larmour radius of species 1)",
+       :help=>
+        "The length of the box in the y direction (measured in the Larmour radius of species 1).  Box size in y direction is 2*pi*y0.",
+       :code_name=>:y0,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer,
+       :autoscanned_defaults=>[10]},
+     :x0=>
+      {:should_include=>"true",
+       :description=>
+        "The length of the box in the x direction (measured in the Larmour radius of species 1) if shat is 0 (ie 1e-6)",
+       :help=>
+        "The length of the box in the x direction (measured in the Larmour radius of species 1) if shat is 0 (ie 1e-6)",
+       :code_name=>:x0,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer,
+       :autoscanned_defaults=>[10]}}},
  :dist_fn_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -125,22 +263,7 @@
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
        :autoscanned_defaults=>[0]}}},
- :parameters=>
-  {:description=>"",
-   :should_include=>"true",
-   :variables=>
-    {:tite=>
-      {:should_include=>"true",
-       :description=>"Ratio of ion to electron temperatures.",
-       :help=>
-        "Ratio of ion to electron temperatures.  This parameter is used only when there is no species called \"electron\" included.",
-       :code_name=>:TiTe,
-       :must_pass=>
-        [{:test=>"kind_of? Numeric",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :autoscanned_defaults=>[1.0]}}},
+ :parameters=>{:description=>"", :should_include=>"true", :variables=>{}},
  :nonlinear_terms_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -372,161 +495,7 @@
          "alpha",
          "slowing-down",
          "trace"],
-       :module=>:parameter_scan},
-     :dens0=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:dens0,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:dens0,
-       :autoscanned_defaults=>[]},
-     :u0=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:u0,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:u0,
-       :autoscanned_defaults=>[]},
-     :uprim2=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>" \n",
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:uprim2,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:uprim2,
-       :autoscanned_defaults=>[]},
-     :nustar=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:nustar,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:nustar,
-       :autoscanned_defaults=>[]},
-     :nu=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:nu,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:nu,
-       :autoscanned_defaults=>[]},
-     :nu_h=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:nu_h,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:nu_h,
-       :autoscanned_defaults=>[]},
-     :tperp0=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:tperp0,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:tperp0,
-       :autoscanned_defaults=>[]},
-     :tpar0=>
-      {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
-       :tests=>["Tst::FLOAT"],
-       :gs2_name=>:tpar0,
-       :must_pass=>
-        [{:test=>"kind_of? Float or kind_of? Integer",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :code_name=>:tpar0,
-       :autoscanned_defaults=>[]},
-     :source=>
-      {:should_include=>"true",
-       :description=>
-        "Normalised alpha source. If set -ve  automatically adjusted to give specified alpha density.",
-       :help=>
-        "Sets the normalised source for alphas. If set negative will be automatically adjusted to give the specified alpha density.",
-       :code_name=>:source,
-       :must_pass=>
-        [{:test=>"kind_of? Numeric",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :autoscanned_defaults=>[]},
-     :sprim=>
-      {:should_include=>"true",
-       :description=>"Gradient of normalised source.",
-       :help=>"Gradient of normalised source.",
-       :code_name=>:sprim,
-       :must_pass=>
-        [{:test=>"kind_of? Numeric",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :autoscanned_defaults=>[]},
-     :gamma_ai=>
-      {:should_include=>"true",
-       :description=>
-        "Alpha ion collion rate. Should be roughly the same as nu_ii.",
-       :help=>
-        "Alpha ion collion rate. Normalisation chosen so that this parameter should be roughly the same as nu_ii.",
-       :code_name=>:gamma_ai,
-       :must_pass=>
-        [{:test=>"kind_of? Numeric",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :autoscanned_defaults=>[]},
-     :gamma_ae=>
-      {:should_include=>"true",
-       :description=>
-        "Alpha electron collion rate. Should be roughly the same as nu_ee.",
-       :help=>
-        "Alpha electron collion rate. Normalisation chosen so that this parameter should be roughly the same as nu_ee.",
-       :code_name=>:gamma_ae,
-       :must_pass=>
-        [{:test=>"kind_of? Numeric",
-          :explanation=>
-           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
-       :type=>:Float,
-       :autoscanned_defaults=>[]}}},
+       :module=>:parameter_scan}}},
  :gryfx_knobs=>
   {:description=>"",
    :should_include=>"true",
@@ -673,7 +642,7 @@
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>["off"]},
+       :autoscanned_defaults=>["on"]},
      :s_alpha=>
       {:should_include=>"true",
        :description=>nil,
@@ -744,18 +713,122 @@
         [{:test=>"kind_of? Integer",
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
-       :autoscanned_defaults=>[1]}}},
- :collision_knobs=>
+       :autoscanned_defaults=>[1]},
+     :fluxfile=>
+      {:should_include=>"true",
+       :description=>"",
+       :help=>"",
+       :code_name=>:fluxfile,
+       :must_pass=>
+        [{:test=>"kind_of? String",
+          :explanation=>"This variable must be a string."}],
+       :type=>:String},
+     :stopfile=>
+      {:should_include=>"true",
+       :description=>"",
+       :help=>"",
+       :code_name=>:stopfile,
+       :must_pass=>
+        [{:test=>"kind_of? String",
+          :explanation=>"This variable must be a string."}],
+       :type=>:String},
+     :restartfile=>
+      {:should_include=>"true",
+       :description=>"",
+       :help=>"",
+       :code_name=>:restartfile,
+       :must_pass=>
+        [{:test=>"kind_of? String",
+          :explanation=>"This variable must be a string."}],
+       :type=>:String}}},
+ :collisions_knobs=>
   {:description=>"",
    :should_include=>"true",
    :variables=>
     {:collision_model=>
       {:should_include=>"true",
-       :description=>nil,
-       :help=>nil,
+       :description=>
+        "Collision model used in the simulation. Options: 'default', 'none', 'lorentz', 'ediffuse'",
+       :help=>
+        "Collision model used in the simulation. \n\n** ''default'' = pitch angle scattering and energy diffusion\n** ''collisionless'',''none'' = collisionless\n** ''lorentz'' =  pitch angle scattering only\n** ''ediffuse'' = energy diffusion only\n** ''krook'' = use home made krook operator (no reason to use this!)",
        :code_name=>:collision_model,
        :must_pass=>
         [{:test=>"kind_of? String",
           :explanation=>"This variable must be a string."}],
        :type=>:String,
-       :autoscanned_defaults=>["none"]}}}}
+       :autoscanned_defaults=>["none"]}}},
+ :theta_grid_eik_knobs=>
+  {:description=>"",
+   :should_include=>"true",
+   :variables=>
+    {:irho=>
+      {:should_include=>"true",
+       :description=>"Chooses definition of flux surface coordinate.",
+       :help=>
+        "Choose definition of flux surface coordinate\n** 1: rho == sqrt(toroidal flux)/sqrt(toroidal flux of LCFS)\n** 2: rho == midplane diameter/LCFS diameter     Recommended\n** 3: rho == poloidal flux/poloidal flux of LCFS",
+       :code_name=>:irho,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer},
+     :eqfile=>
+      {:should_include=>"true",
+       :description=>nil,
+       :help=>" Name of file with numerical equilibrium data (if required)\n",
+       :code_name=>:eqfile,
+       :must_pass=>
+        [{:test=>"kind_of? String",
+          :explanation=>"This variable must be a string."}],
+       :type=>:String},
+     :equal_arc=>
+      {:should_include=>"true",
+       :description=>nil,
+       :help=>" Change field-line coordinate.  Recommended value: F\n",
+       :code_name=>:equal_arc,
+       :must_pass=>
+        [{:test=>"kind_of? String and FORTRAN_BOOLS.include? self",
+          :explanation=>
+           "This variable must be a fortran boolean. (In Ruby this is represented as a string: e.g. '.true.')"}],
+       :type=>:Fortran_Bool},
+     :bishop=>
+      {:should_include=>"true",
+       :description=>nil,
+       :help=>
+        " Use Bishop relations to generate metric coefficients.\n** 0: Use high-aspect ratio coefficients (only for debugging)\n** 1: Use actual equilibrium values of shat, p'  Recommended \n** 2: Use numerical equilibrium + s_hat_input and p_prime_input\n** 3: Use numerical equilibrium + s_hat_input and inv_Lp_input\n** 4: Use numerical equilibrium + s_hat_input and beta_prime_input \n** 5: Use numerical equilibrium + s_hat_input and alpha_input\n** 6: Use numerical equilibrium + beta_prime_input\n** 7: Use numerical equilibrium and multiply pressure gradient by dp_mult\n** 8: Use numerical equilibrium + s_hat_input and multiply pressure gradient by dp_mult\n** 9: Use numerical equilibrium + s_hat_input and beta_prime_input\n** Otherwise: Use magnetic shear and pressure gradient as set elsewhere.\n** \n",
+       :code_name=>:bishop,
+       :must_pass=>
+        [{:test=>"kind_of? Integer",
+          :explanation=>"This variable must be an integer."}],
+       :type=>:Integer},
+     :s_hat_input=>
+      {:should_include=>"true",
+       :description=>nil,
+       :help=>" Overrides shat.\n",
+       :code_name=>:s_hat_input,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :beta_prime_input=>
+      {:should_include=>"true",
+       :description=>"The gradient of the pressure.",
+       :help=>
+        "The gradient of the pressure. Strictly speaking this parameter is not <math>\\frac{\\partial \\beta}{\\partial \\rho} </math> but <math>\\beta \\frac{1}{p}\\frac{\\partial p}{\\partial \\rho}</math>: in other words, the gradient of the magnetic field is ignored. Used only if bishop = 4 or 9.",
+       :code_name=>:beta_prime_input,
+       :must_pass=>
+        [{:test=>"kind_of? Numeric",
+          :explanation=>
+           "This variable must be a floating point number (an integer is also acceptable: it will be converted into a floating point number)."}],
+       :type=>:Float},
+     :equilibrium_type=>
+      {:should_include=>"true",
+       :description=>
+        "Choice of equilbrium, can be \"miller\", \"chease\", or \"salpha\".",
+       :help=>
+        "Choice of equilbrium, can be \"miller\", \"chease\", or \"salpha\".",
+       :code_name=>:equilibrium_type,
+       :must_pass=>
+        [{:test=>"kind_of? String",
+          :explanation=>"This variable must be a string."}],
+       :type=>:String}}}}
