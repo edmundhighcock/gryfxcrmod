@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gryfxcrmod"
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Edmund Highcock"]
-  s.date = "2013-08-09"
+  s.date = "2013-08-15"
   s.description = "This is a customised subclass of the CodeRunner::Run  class which allows CodeRunner to run and analyse the gyrofluid GPU turbulent transport solver Gryfx."
   s.email = "edmundhighcock@users.sourceforge.net"
   s.extra_rdoc_files = [
@@ -25,8 +25,16 @@ Gem::Specification.new do |s|
     "VERSION",
     "gryfxcrmod.gemspec",
     "lib/gryfxcrmod.rb",
+    "lib/gryfxcrmod/deleted_variables.rb",
     "lib/gryfxcrmod/gryfx.rb",
+    "lib/gryfxcrmod/namelist_tools.rb",
     "lib/gryfxcrmod/namelists.rb",
+    "sync_mediawiki/helper.rb",
+    "sync_mediawiki/sync_mediawiki.rb",
+    "sync_variables/helper.rb",
+    "sync_variables/sync_variables.rb",
+    "test/cyclone_miller_ke.in",
+    "test/cyclone_miller_ke.tgz",
     "test/helper.rb",
     "test/test_gryfxcrmod.rb"
   ]
@@ -41,20 +49,29 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<coderunner>, [">= 0.13.0"])
+      s.add_runtime_dependency(%q<gs2crmod>, [">= 0.9.9"])
+      s.add_runtime_dependency(%q<ruby-netcdf>, [">= 0.6.6"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<shoulda-context>, [">= 1.1.5"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_development_dependency(%q<jeweler>, [">= 1.8.4"])
     else
       s.add_dependency(%q<coderunner>, [">= 0.13.0"])
+      s.add_dependency(%q<gs2crmod>, [">= 0.9.9"])
+      s.add_dependency(%q<ruby-netcdf>, [">= 0.6.6"])
       s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<shoulda-context>, [">= 1.1.5"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_dependency(%q<jeweler>, [">= 1.8.4"])
     end
   else
     s.add_dependency(%q<coderunner>, [">= 0.13.0"])
+    s.add_dependency(%q<gs2crmod>, [">= 0.9.9"])
+    s.add_dependency(%q<ruby-netcdf>, [">= 0.6.6"])
     s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<shoulda-context>, [">= 1.1.5"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 1.0.0"])
     s.add_dependency(%q<jeweler>, [">= 1.8.4"])
