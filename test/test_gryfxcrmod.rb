@@ -27,7 +27,7 @@ if ENV['GRYFX_EXEC']
 			FileUtils.rm(tfolder + '/v/id_1/.code_runner_run_data')
 			FileUtils.rm(tfolder + '/v/id_1/code_runner_results.rb')
 			## Don't uncomment the line below unless you *really* know what you are doing! Replacing the test archive will break many of the tests
-			Dir.chdir('test'){system "tar -czf cyclone_miller_ke.tgz cyclone_miller_ke/" unless FileTest.exist?('cyclone_miller_ke.tgz')}
+			Dir.chdir('test'){system "rm cyclone_miller_ke.tgz; tar -czf cyclone_miller_ke.tgz cyclone_miller_ke/" unless FileTest.exist?('cyclone_miller_ke.tgz')}
 			FileUtils.rm_r(tfolder)
 		end
 		def test_submission
@@ -53,6 +53,12 @@ class TestAnalysis < Test::Unit::TestCase
 		#assert_equal(0.13066732664774272, @runner.run_list[1].max_growth_rate)
 		#assert_equal(0.13066732664774272, @runner.run_list[1].growth_rate_at_ky[0.5])
 		#assert_equal(:Complete, @runner.run_list[1].status)
+	end
+	def test_graphs
+		kit = @run.graphkit('phi2_by_ky_vs_time', {ky_index: :all})
+		kit.gp.logscale = "y"
+		#kit.gnuplot
+
 	end
 	def tfolder
 		'test/cyclone_miller_ke'

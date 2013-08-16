@@ -43,9 +43,22 @@ class CodeRunner
 			name = @run_name
 			name += " (res: #@restart_id)" if @restart_id
 			name += " real_id: #@real_id" if @real_id
-			beginning = sprintf("%2d:%d %-60s %1s:%2.1f(%s) %3s%1s",  @id, @job_no, name, @status.to_s[0,1],  @run_time.to_f / 60.0, @nprocs.to_s, percent_complete, "%")
+			beginning = sprintf("%2d:%d %-60s %1s:%2.1f(%s) %3s%1s ",  @id, @job_no, name, @status.to_s[0,1],  @run_time.to_f / 60.0, @nprocs.to_s, percent_complete, "%")
 			if ctd
 				#beginning += sprintf("Q:%f, Pfusion:%f MW, Ti0:%f keV, Te0:%f keV, n0:%f x10^20", fusionQ, pfus, ti0, te0, ne0)
+				 if @nonlinear_mode == "off"
+						beginning += sprintf("%3.2e %3.2e %4s", 
+						 @fastest_growing_mode, @max_growth_rate, 
+						 @freq_of_max_growth_rate||0.0)  rescue ""
+				 elsif @nonlinear_mode == "on"
+			# 		 p @hflux_tot_stav
+					 beginning += "       sat:#{saturated.to_s[0]}"  if not @saturated.nil?
+					 beginning += sprintf(" hflux:%1.2e", @hflux_tot_stav) if  @hflux_tot_stav 
+					 beginning += sprintf("+/-%1.2e", @hflux_tot_stav_error) if  @hflux_tot_stav_error
+					 beginning += sprintf(" momflux:%1.2e", @es_mom_flux_stav.values.sum) if @es_mom_flux_stav and @es_mom_flux_stav.values[0]
+					 beginning += '  SC:' + @spectrum_check.map{|c| c.to_s}.join(',') if @spectrum_check 
+					 beginning += '  VC:' + @vspace_check.map{|c| sprintf("%d", ((c*10.0).to_i rescue -1))}.join(',') if @vspace_check 
+				 end
 			end
 			beginning += "  ---#{@comment}" if @comment
 			beginning
@@ -89,7 +102,7 @@ class CodeRunner
 				@status = :Incomplete
 			else
 				get_completed_timesteps
-				if percent_complete = 100.0*@completed_timesteps.to_f/(nstep/nwrite)  > 5.0
+				if (@percent_complete = 100.0*@completed_timesteps.to_f/(nstep/nwrite))  > 5.0
 					@status = :Complete
 				else
 					@status = :Failed
@@ -109,7 +122,15 @@ class CodeRunner
 			@directory + '/' +  @run_name + '.cdf'
 		end
 
-		def calculate_results
+		#def calculate_results
+		#end
+		
+		def calculate_frequencies
+			@real_frequencies = FloatHash.new
+		end
+
+		def gryfx?
+			true
 		end
 
 	end
