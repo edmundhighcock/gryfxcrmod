@@ -89,6 +89,8 @@ class CodeRunner
 		# This method, as its name suggests, is called whenever CodeRunner is asked to analyse a run directory. This happens if the run status is not :Complete, or if the user has specified recalc_all(-A on the command line) or reprocess_all (-a on the command line).
 		#
 		def process_directory_code_specific
+			@grid_option = "box" # For compatibility with the GS2 routines
+			@write_phi_over_time  = "true" # For compatibility with the GS2 routines
 			get_status
 			#p ['id is', id, 'ctd is ', ctd]
 			if ctd
@@ -133,5 +135,38 @@ class CodeRunner
 			true
 		end
 
+
+		def geometric_factors_gsl_tensor(options)
+				theta_vec = gsl_vector(:theta, options)
+				factors = GSL::Tensor.alloc(6,theta_vec.size)
+				values = [:Rplot, :Zplot, :aplot, :Rprime, :Zprime, :aprime].map do |name|
+					arr = netcdf_file.var(name).get.to_a
+					if options[:periodic]
+						arr += [arr[0]]
+					end
+					arr
+				end
+				#ep values
+				shape = factors.shape
+				for i in 0...shape[0]
+						unless options[:interpolate_theta]
+							for j in 0...shape[1]
+								factors[i,j] = values[i][j]
+							end
+						else
+							opts = options.dup
+							opts[:interpolate_theta] = nil
+							opts[:thetamax] = opts[:thetamin] = nil
+							theta_vec_short = gsl_vector(:theta, opts)
+							#p 'sizes', [theta_vec_short.size, values[i].to_gslv.size]
+							interp = GSL::ScatterInterp.alloc(:cubic, [theta_vec_short, values[i].to_gslv], true, [3.0].to_gslv)
+							for j in 0...theta_vec.size
+								factors[i,j] = interp.eval(theta_vec[j])
+							end
+						end
+				end
+				#ep factors
+				return factors
+		end
 	end
 end
