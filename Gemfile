@@ -3,7 +3,7 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
     gem "coderunner", ">= 0.13.0"
-    gem "gs2crmod", ">= 0.10.0"
+    gem "gs2crmod", ">= 0.10.1"
 		gem "ruby-netcdf", ">= 0.6.6"
 
 # Add dependencies to develop your gem here.
