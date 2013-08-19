@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gryfxcrmod"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Edmund Highcock"]
-  s.date = "2013-08-15"
+  s.date = "2013-08-19"
   s.description = "This is a customised subclass of the CodeRunner::Run  class which allows CodeRunner to run and analyse the gyrofluid GPU turbulent transport solver Gryfx."
   s.email = "edmundhighcock@users.sourceforge.net"
   s.extra_rdoc_files = [
@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<coderunner>, [">= 0.13.0"])
-      s.add_runtime_dependency(%q<gs2crmod>, [">= 0.9.9"])
+      s.add_runtime_dependency(%q<gs2crmod>, [">= 0.10.1"])
       s.add_runtime_dependency(%q<ruby-netcdf>, [">= 0.6.6"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<shoulda-context>, [">= 1.1.5"])
@@ -58,7 +58,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, [">= 1.8.4"])
     else
       s.add_dependency(%q<coderunner>, [">= 0.13.0"])
-      s.add_dependency(%q<gs2crmod>, [">= 0.9.9"])
+      s.add_dependency(%q<gs2crmod>, [">= 0.10.1"])
       s.add_dependency(%q<ruby-netcdf>, [">= 0.6.6"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<shoulda-context>, [">= 1.1.5"])
@@ -68,7 +68,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<coderunner>, [">= 0.13.0"])
-    s.add_dependency(%q<gs2crmod>, [">= 0.9.9"])
+    s.add_dependency(%q<gs2crmod>, [">= 0.10.1"])
     s.add_dependency(%q<ruby-netcdf>, [">= 0.6.6"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<shoulda-context>, [">= 1.1.5"])
