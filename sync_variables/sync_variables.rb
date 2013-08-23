@@ -5,7 +5,7 @@ CodeRunner.setup_run_class('gryfx')
 # Code to analyse the source code to look for new input variables... very imperfect
 ################################################################################
 
-CodeRunner::Gryfx.synchronise_variables_from_input_file('test/cyclone_miller_ke.in')
+CodeRunner::Gryfx.synchronise_variables_from_input_file(ENV['GRYFX_SOURCE'] + '/namelist_defaults.in')
 #CodeRunner::Gryfx.update_defaults_from_source_code(ENV['GRYFX_SOURCE'])
 
 

@@ -29,13 +29,15 @@ if ENV['GRYFX_EXEC']
 			## Don't uncomment the line below unless you *really* know what you are doing! Replacing the test archive will break many of the tests
 			Dir.chdir('test'){system "rm cyclone_miller_ke.tgz; tar -czf cyclone_miller_ke.tgz cyclone_miller_ke/" unless FileTest.exist?('cyclone_miller_ke.tgz')}
 			#Dir.chdir('test'){system "rm cyclone_miller_ke.tgz; tar -czf cyclone_miller_ke.tgz cyclone_miller_ke/"} #unless FileTest.exist?('cyclone_miller_ke.tgz')}
-			FileUtils.rm_r(tfolder)
+			#FileUtils.rm_r(tfolder)
 		end
 		def test_submission
 			CodeRunner.submit(T: false, C: 'gryfx', X: ENV['GRYFX_EXEC'], D: 'test_gryfxcrmod', n: '1', Y: tfolder, p: '{}')
 			CodeRunner.submit(T: false, C: 'gryfx', X: ENV['GRYFX_EXEC'], D: 'test_gryfxcrmod', n: '1', Y: tfolder, p: '{nstep: 7000, init_amp: 0.5, nonlinear_mode: "on"}')
 			CodeRunner::Gryfx.diff_input_files(tfolder + '/v/id_1/v_id_1.in', 'test/cyclone_miller_ke.in')
 			CodeRunner.status(Y: tfolder)
+			assert_equal(2, CodeRunner.fetch_runner(Y: tfolder).run_list.size)
+			assert_equal(:Complete, CodeRunner.fetch_runner(Y: tfolder).run_list[1].status)
 		end
 	end
 else

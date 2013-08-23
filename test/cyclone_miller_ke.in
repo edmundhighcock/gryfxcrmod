@@ -173,28 +173,28 @@
 &gryfx_knobs
   inlpm = 2
   dnlpm = 1.0
-  hyper = "off"
+  hyper = .false.
   nu_hyper = 1.0
   p_hyper = 2
   init_amp = 1.0e-5
   scan_type = "outputs"
   scan_number = 1
-  zero_restart_avg = "off"
-  no_zderiv_covering = "off"
-  write_omega = 'off'
-  write_phi = "off"
+  zero_restart_avg = .false.
+  no_zderiv_covering = .false.
+  write_omega = .false.
+  write_phi = .false.
   restart = "off"
-  no_omegad = "off"
-  const_curv = "off"
-  varenna = "off"
-  nlpm = "off"
-  smagorinsky = "off"
+  no_omegad = .false.
+  const_curv = .false.
+  varenna = .false.
+  nlpm = .false.
+  smagorinsky = .false.
   init = "density"
-  debug = "on"
-  s_alpha = "on"  
-  fluxfile = "./scan/output/linearflux"
-  stopfile = "linear.stop"
-  restartfile = "restart/linear.bin"  
+  debug = .true.
+  !fluxfile = "./scan/output/linearflux"
+  !stopfile = "linear.stop"
+  !restartfile = "restart/linear.bin"  
+  ostem_rname=.true.
 /
 
 
