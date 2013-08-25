@@ -101,7 +101,9 @@ class CodeRunner
 
 		def get_status
 			if @running
-				@status = :Incomplete
+				unless @status==:Queueing
+					@status = :Incomplete
+				end
 			else
 				get_completed_timesteps
 				if (@percent_complete = 100.0*@completed_timesteps.to_f/(nstep/nwrite))  > 5.0
