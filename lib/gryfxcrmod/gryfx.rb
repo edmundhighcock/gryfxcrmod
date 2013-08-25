@@ -103,6 +103,11 @@ class CodeRunner
 			if @running
 				unless @status==:Queueing
 					@status = :Incomplete
+					get_completed_timesteps
+					if @completed_timesteps.to_f/(nstep/nwrite) == 1.0
+						@status=:Complete
+					end
+
 				end
 			else
 				get_completed_timesteps
