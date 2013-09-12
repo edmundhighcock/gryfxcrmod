@@ -142,6 +142,15 @@ class CodeRunner
 			true
 		end
 
+		def code_run_environment
+			case @system
+			when /stampede/
+				"module load cuda\n module load hdf5\n module load netcdf"
+			when /generic_linux/, /macosx/
+				"# No configuration necessary"
+			end
+		end
+
 
 		def geometric_factors_gsl_tensor(options)
 				theta_vec = gsl_vector(:theta, options)
