@@ -143,7 +143,7 @@ class CodeRunner
 		end
 
 		def code_run_environment
-			case @system
+			case @sys
 			when /stampede/
 				"module load cuda\n module load hdf5\n module load netcdf"
 			when /generic_linux/, /macosx/
