@@ -94,10 +94,11 @@ class CodeRunner
 			get_status
 			#p ['id is', id, 'ctd is ', ctd]
 			if ctd
-				calculate_results 
+				#calculate_results 
 			end
 			#p ['fusionQ is ', fusionQ]
 		end
+
 
 		def get_status
 			if @running
@@ -122,7 +123,7 @@ class CodeRunner
 
 		def get_completed_timesteps
 			if FileTest.exist?(@run_name  + '.cdf')
-				@completed_timesteps = gsl_vector('t').size
+				@completed_timesteps = netcdf_file.var('t').get.size #gsl_vector('t').size
 			else
 				@completed_timesteps = 0
 			end
@@ -132,6 +133,8 @@ class CodeRunner
 			@directory + '/' +  @run_name + '.cdf'
 		end
 
+    def generate_component_runs
+    end
 		#def calculate_results
 		#end
 		
