@@ -67,6 +67,15 @@ class CodeRunner
 
 		#  This is a hook which gets called just before submitting a simulation. It sets up the folder and generates any necessary input files.
 		def generate_input_file
+      if @restart_id and (not @is_a_restart or @resubmit_id)   
+        @runner.run_list[@restart_id].restart(self)
+      elsif ((@save_for_restart and @save_for_restart.fortran_true?) or
+             (@save_for_restart_new and @save_for_restart_new.fortran_true?)) and 
+        (not @is_a_restart or @resubmit_id)
+        @restart_dir = "nc"
+        FileUtils.makedirs @restart_dir
+        @restart_file = "#@run_name.nc"
+      end
 				write_input_file
 		end
 
