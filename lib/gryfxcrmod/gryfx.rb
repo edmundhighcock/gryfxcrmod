@@ -123,7 +123,16 @@ class CodeRunner
 
 		def get_completed_timesteps
 			if FileTest.exist?(@run_name  + '.cdf')
-				@completed_timesteps = netcdf_file.var('t').get.size #gsl_vector('t').size
+        count = 0
+        begin
+          @completed_timesteps = netcdf_file.var('t').get.size #gsl_vector('t').size
+        rescue NetcdfError => err 
+          eputs err
+          count += 1
+          eputs "Retrying: #{count} attempt(s) out of 4"
+          sleep 1
+          count < 5 ?  retry : raise(err)
+        end
 			else
 				@completed_timesteps = 0
 			end
