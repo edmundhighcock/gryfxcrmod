@@ -2113,6 +2113,16 @@
           :explanation=>"This variable must be an integer."}],
        :type=>:Integer,
        :autoscanned_defaults=>[1]},
+     :write_netcdf=>
+      {:should_include=>"true",
+       :description=>"Set true to write to netcdf file.",
+       :help=>"",
+       :code_name=>:write_netcdf,
+       :must_pass=>
+        [{:test=>"kind_of? String and FORTRAN_BOOLS.include? self",
+          :explanation=>
+           "This variable must be a fortran boolean. (In Ruby this is represented as a string: e.g. '.true.')"}],
+       :type=>:Fortran_Bool},
      :hyper=>
       {:should_include=>"true",
        :description=>"",

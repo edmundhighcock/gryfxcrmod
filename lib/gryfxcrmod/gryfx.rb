@@ -3,13 +3,18 @@ class CodeRunner
 	#
 	#  It  generates the Gryfx input file, and both analyses the results and allows easy plotting of them. 
 	CodeRunner.setup_run_class('gs2')
+  class Gs2
+    # This is necessary because the restart
+    # parameter overrwrites this function in Gryfx
+    alias :set_restart :restart
+  end
 	class Gryfx < Gs2
 		#include CodeRunner::SYSTEM_MODULE
 
 
 
 		# Where this file is
-		@code_module_folder = folder = File.dirname(File.expand_path(__FILE__)) # i.e. the directory this file is in
+		@code_module_folder = File.dirname(File.expand_path(__FILE__)) # i.e. the directory this file is in
 
 		# Use the Run::FortranNamelist tools to process the variable database
 		setup_namelists(@code_module_folder)
@@ -64,11 +69,44 @@ class CodeRunner
 			beginning
 		end
 
+    def set_restart(new_run)
+      eputs 'Restarting ' + @run_name
+      #(rcp.variables).each{|v| new_run.set(v, send(v)) if send(v)}
+      #@naming_pars.delete(:preamble)
+      #SUBMIT_OPTIONS.each{|v| new_run.set(v, self.send(v)) unless new_run.send(v)}
+      #new_run.is_a_restart = true
+      #new_run.restart_id = @id
+      #new_run.restart_run_name = @run_name
+      #@runner.nprocs = @nprocs if @runner.nprocs == "1" # 1 is the default
+      #new_run.run_name = nil
+      #new_run.naming_pars = @naming_pars
+      #new_run.update_submission_parameters(new_run.parameter_hash_string, false) if new_run.parameter_hash
+      #new_run.naming_pars.delete(:restart_id)
+      #new_run.generate_run_name
+      #copy_restart_files(new_run)
+      super(new_run)
+      new_run.restart = "on"
+      # Gryfx automatically configures GS2 for restart so here we set the GS2
+      # parameters to default
+      new_run.delt_option = "default"
+      new_run.ginit_option = "noise"
+      new_run
+    end
+
+    def copy_restart_files(new_run)
+      eputs 'Copying gryfx restart file...', ''
+      FileUtils.cp(
+        @directory + '/' + @run_name + '.restart.cdf', 
+        new_run.directory + '/' + new_run.run_name + '.restart.cdf'
+      )
+      super(new_run)
+    end
+
 
 		#  This is a hook which gets called just before submitting a simulation. It sets up the folder and generates any necessary input files.
 		def generate_input_file
       if @restart_id and (not @is_a_restart or @resubmit_id)   
-        @runner.run_list[@restart_id].restart(self)
+        @runner.run_list[@restart_id].set_restart(self)
       elsif ((@save_for_restart and @save_for_restart.fortran_true?) or
              (@save_for_restart_new and @save_for_restart_new.fortran_true?)) and 
         (not @is_a_restart or @resubmit_id)
@@ -76,6 +114,7 @@ class CodeRunner
         FileUtils.makedirs @restart_dir
         @restart_file = "#@run_name.nc"
       end
+      @avail_cpu_time = (@wall_mins - 1.0) * 60.0 if @wall_mins
 				write_input_file
 		end
 
@@ -99,7 +138,7 @@ class CodeRunner
 		#
 		def process_directory_code_specific
 			@grid_option = "box" # For compatibility with the GS2 routines
-			@write_phi_over_time  = "true" # For compatibility with the GS2 routines
+			@write_phi_over_time  = ".true." # For compatibility with the GS2 routines
 			get_status
 			#p ['id is', id, 'ctd is ', ctd]
 			if ctd
